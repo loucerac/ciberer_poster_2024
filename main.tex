@@ -27,7 +27,7 @@
 %\usetitlestyle{verticalShading}
 
 
-\title{\parbox{\linewidth}{\centering drexml: una herramienta para el descubrimiento de dianas terapéuticas en Enfermeddad Raras}}
+\title{\parbox{\linewidth}{\centering drexml: una herramienta para el descubrimiento de dianas terapéuticas en Enfermedades Raras}}
 
 \author[1,2]{\large Marina Esteban-Medina}
 \author[1,2]{\large V\'ictor Manuel de la Oliva Roque}
@@ -80,7 +80,7 @@
 \maketitle[width=\linewidth,titletotopverticalspace=-0.05cm]
 
 \block{Introducción}{
-    Drexml es una herramienta de software que utiliza aprendizaje automático para identificar nuevos usos para medicamentos existentes. Se ha validado con éxito en dos enfermedades raras: anemia de Fanconi y melanoma familiar. El modelo identifica dianas terapéuticas para enfermedades específicas mediante el empleo de aprendizaje automático y modelado mecanicista de la transducción de señales. En el caso de la anemia de Fanconi, el modelo predice con éxito fármacos reutilizados previamente validados, mientras que en el caso del melanoma familiar, identifica un conjunto prometedor de fármacos para futuras investigaciones.
+    \textsc{\textbf{DREXML}} es una herramienta de \textbf{software libre} que utiliza aprendizaje automático para \textbf{identificar nuevos usos para medicamentos existentes}. Se ha validado con éxito en dos enfermedades raras: Anemia de Fanconi, Melanoma Familiar,  COVID-19 y Retinitis Pigmentosa. El modelo identifica dianas terapéuticas para enfermedades específicas mediante el empleo de \textbf{aprendizaje automático y modelado mecanicista de la transducción de señale}s. En el caso de la Anemia de Fanconi, el modelo predice con éxito fármacos reutilizados previamente validados, mientras que en el caso del melanoma familiar, identifica un conjunto prometedor de fármacos para futuras investigaciones.
 }
 
 % \note[rotate=8, connection, width = 7cm,
@@ -90,23 +90,23 @@
 \begin{columns}
 
     \column{0.33}
-        \block{\textsc{(a0)} Mapa de la enfermedad}{
+        \block{Mapa de la enfermedad}{
             \begin{itemize}
             \item Genes en Orphanet, DisGeNet, \dots?
             \item Control Vs Case?
-            \item Pathways?.
+            \item Pathways?
             \end{itemize}
         }
 
     \column{0.33}
-        \block{\textsc{(a1)} Transducción de la Señal}{
+        \block{Transducción de la Señal}{
             \[
                 S_{n} = v_{n} \left(1 - \prod_{s_{a} \in A} \left( 1 - s_{a} \right) \right) \prod_{s_{i} \in I} \left( 1- s_{i} \right)
             \]
         }
 
     \column{0.34}
-        \block{\textsc{(a2)} Contextualizar dianas}{
+        \block{Contextualiza dianas}{
             \[
                 \phi_i^k = \frac{1}{K!} \sum_{S \subseteq F \backslash\{i\}} \frac{|S|!(n_{circuits}-|S|-1)!}{n_{circuits}!} [f_x(S \cup \{i\}) - f_x(S)]   
             \]
@@ -116,34 +116,25 @@
 
 \begin{columns}
     \column{0.33}
-        \block{\textsc{(a3)} MultiTask Machine Learning}{%
-            Can {\bf\textsc{Map Activity}} be predicted from (Drugbank) {\bf\textsc{KDT}}?
-            Can we infer what KDT are important to regulate the map. 
-            \textit{Learn}  KDT-Signalization \textit{relationships}.
+        \block{Construyendo puentes}{%
+
+            Conectando \textbf{Diana - Enfermedad}. \\
+
+            Usando \textbf{trasncriptómica pública} de \textbf{sanos}. \\
+
         }
-        \block{\textsc{(a4)} Model Explanations}{%
-            \begin{itemize}
-                \item Useful but too broad.
-                \item They (only) speak us about the whole map.
-            \end{itemize}
+
+        \block{Software y Publicación}{%
+        \begin{tikzfigure}
+            \includegraphics[width=0.25\linewidth]{./fig/drexml_pip.pdf} \hspace*{4cm}
+            \includegraphics[width=0.25\linewidth]{./fig/drexml_doi.pdf}
+        \end{tikzfigure}
         }
-        \block{\textsc{(a5)} SHapley Additive exPlanations}{%
-            \begin{itemize}
-                \item Fair feature and sample wise contributions.
-                \item Disaggregated by circuit by construction.
-                \item Additive (aggregated by biologically-relevant groups)
-            \end{itemize}
-        }
-        \block{\textsc{(a6)} Validación basada en Datos}{%
-            \begin{itemize}
-                \item Optimization + Performance with Repeated Nested CV
-                \item Explainability tested with novel methods (Nogueira)
-            \end{itemize}
-        }
+
     \column{0.67}
-        \block{A Modular Methodology}{%
+        \block{Inferir el Impacto de las Dianas sobre el Mapa Mecanicista de la Enfermedad}{%
             \begin{tikzfigure}
-            \includegraphics[width=\linewidth]{./fig/drexml/drexml_font_L.png}
+            \includegraphics[width=\linewidth]{./fig/drexml_font_L.png}
             \end{tikzfigure}
         }
 
@@ -153,49 +144,85 @@
         % ]{Oh wait! A note!}
 \end{columns}
 
-\begin{columns}
-    \column{0.6}
-    \block{\textsc{(b, c)} Findings}{
-        \begin{itemize}
-            \item 380 KDTs (targeted by 679 drugs) have direct influence over the whole or partial parts of the map.
-            
-            \item The GO biological processes enriched are mostly related to immune activity (T-cell, inflammatory response)
-            
-            \item The COVID-19 Hallmarks are represented.
-            
-        \end{itemize}
-    }
-    \column{0.4}
-    \block{Trabajos futuros}{%
-        \begin{itemize}
-            \item Speed the computation (GPU extensions).
-            
-            \item Develop \textit{sign} like \textsc{SHAP} aggregations.
-            
-            \item Aggregations in \textit{task}-space.
 
+
+\begin{columns}
+
+    \column{0.6}
+        \begin{subcolumns}
+            \subcolumn{0.36}
+
+                    \block{Métricas inteligibles}{%
+                        \begin{tikzfigure}
+                            \includegraphics[width=\linewidth]{./fig/metrics.pdf}
+                        \end{tikzfigure}
+                    }
+
+            \subcolumn{0.64}
+
+                    \block{Filtrando y contextualizando}{%
+                        \begin{tikzfigure}
+                            \includegraphics[width=\linewidth]{./fig/fanconi_anemia_profile_egfr.pdf}
+                        \end{tikzfigure}
+                    }
+        
+ 
+
+        \end{subcolumns}
+
+    \block{Resultados}{
+        \begin{itemize}
+            \item Software Libre \colorbox{gray!10}{{\bf{pip install drexml}}}
+            
+            \item Fácilmente usable \colorbox{gray!10}{{\bf{drexml run disease.env}}}
+            
+            \item Interrogar funcionalmente a las dianas en el contexto de una enfermedad dada.
+            
+            \item Anemia de Fanconi
+            \begin{itemize}
+                \item Resultados congruentes con validaciones experimentales previas.
+                \item TGF$\beta$1 y EGFR son dianas más específicas con menos efectos secundarios.
+            \end{itemize}
+
+            \item Melanoma Familiar
+            \begin{itemize}
+                \item Se proponen dianas que iterfieren con la vía de melanogénesis:TYR / JAK.
+            \end{itemize}
+            
+            \item Preparada para regímenes de escasez de datos.
         \end{itemize}
     }
+            
+    \column{0.4}
+
+    \block{Melanoma Familiar}{%
+         \begin{tikzfigure}
+             \includegraphics[width=0.92\linewidth]{./fig/heatmap_circuits_KDT_drugeff_mela.pdf}
+         \end{tikzfigure}
+      }
+
+
 \end{columns}
 
+
 \begin{columns}
 
-    \column{0.5}
-        \mtblock{2cm}{Funding}{%
-            \raisebox{-0.5\height}{\includegraphics[width=0.3\linewidth]{./fig/bbva.pdf}}
+    \column{0.3}
+        \mtblock{2cm}{Financiación}{%
+            \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/ministerio.pdf}}
             \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.3\linewidth]{./fig/ministerio.pdf}}
-            \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.3\linewidth]{./fig/mlfpm_grant.png}}
+            \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/mlfpm_grant.png}}
         }
 
-    \column{0.5}
-        \mtblock{2cm}{Speaker Affiliations}{%
-            \raisebox{-0.5\height}{\includegraphics[width=0.08\linewidth]{./fig/cab_logo_vectorizado.pdf}}
+    \column{0.7}
+        \mtblock{2cm}{Afiliaciones del Ponente}{%
+            \raisebox{-0.5\height}{\includegraphics[width=0.24\linewidth]{./fig/andalusianplatform_color.png}}
             \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.44\linewidth]{./fig/FPS_Con_pastilla.jpg}}
+            \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/fps_horizontal.png}}
             \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.22\linewidth]{./fig/ibis_logo.png}}
+            \raisebox{-0.5\height}{\includegraphics[width=0.16\linewidth]{./fig/ibis_logo.png}}
+            \hspace{\stretch{1}}
+            \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/ciberer.png}}
         }
 
 \end{columns}
