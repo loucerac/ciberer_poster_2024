@@ -76,6 +76,40 @@
 %% Uncomment to switch off tikzposter footer
 \tikzposterlatexaffectionproofoff
 
+\usepackage[style=authoryear-comp,
+sortcites=true,
+sorting=nyt,
+isbn=false,
+natbib=true, 
+citestyle=authoryear,
+bibstyle=authoryear,
+backend=biber,
+maxnames=1,
+maxcitenames=1,
+datamodel=authorjabbryear
+] {biblatex}
+
+\DefineBibliographyStrings{ngerman}{ andothers = {{et\,al\adddot}} }
+
+\renewbibmacro*{cite}{%from authoryear.cbx
+  \iffieldundef{shorthand}
+    {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
+       {\usebibmacro{cite:label}%
+        \setunit{\addspace}}
+       {\printnames{labelname}%
+        \setunit{\nameyeardelim}}%
+     \iffieldundef{journalabbr}{}{%
+        \printfield{journalabbr}%
+        \setunit{\nameyeardelim}%
+        }%
+     \usebibmacro{cite:labelyear+extrayear}}
+    {\usebibmacro{cite:shorthand}}}
+
+
+\addbibresource{main.bib}
+
+
+
 \begin{document}
 \maketitle[width=\linewidth,titletotopverticalspace=-0.05cm]
 
@@ -90,58 +124,58 @@
 \begin{columns}
 
     \column{0.33}
-        \block{Mapa de la enfermedad}{
-            \begin{itemize}
+    \block{Mapa de la enfermedad}{
+        \begin{itemize}
             \item Genes en Orphanet, DisGeNet, \dots?
             \item Control Vs Case?
             \item Pathways?
-            \end{itemize}
-        }
+        \end{itemize}
+    }
 
     \column{0.33}
-        \block{Transducción de la Señal}{
-            \[
-                S_{n} = v_{n} \left(1 - \prod_{s_{a} \in A} \left( 1 - s_{a} \right) \right) \prod_{s_{i} \in I} \left( 1- s_{i} \right)
-            \]
-        }
+    \block{Transducción de la Señal}{
+        \[
+            S_{n} = v_{n} \left(1 - \prod_{s_{a} \in A} \left( 1 - s_{a} \right) \right) \prod_{s_{i} \in I} \left( 1- s_{i} \right)
+        \]
+    }
 
     \column{0.34}
-        \block{Contextualiza dianas}{
-            \[
-                \phi_i^k = \frac{1}{K!} \sum_{S \subseteq F \backslash\{i\}} \frac{|S|!(n_{circuits}-|S|-1)!}{n_{circuits}!} [f_x(S \cup \{i\}) - f_x(S)]   
-            \]
-        }
+    \block{Contextualiza dianas}{
+        \[
+            \phi_i^k = \frac{1}{K!} \sum_{S \subseteq F \backslash\{i\}} \frac{|S|!(n_{circuits}-|S|-1)!}{n_{circuits}!} [f_x(S \cup \{i\}) - f_x(S)]
+        \]
+    }
 
 \end{columns}
 
 \begin{columns}
     \column{0.33}
-        \block{Construyendo puentes}{%
+    \block{Construyendo puentes}{%
 
-            Conectando \textbf{Diana - Enfermedad}. \\
+        Conectando \textbf{Diana - Enfermedad}. \\
 
-            Usando \textbf{trasncriptómica pública} de \textbf{sanos}. \\
+        Usando \textbf{trasncriptómica pública} de \textbf{sanos}. \\
 
-        }
+    }
 
-        \block{Software y Publicación}{%
+    \block{Software y Publicación}{%
         \begin{tikzfigure}
             \includegraphics[width=0.25\linewidth]{./fig/drexml_pip.pdf} \hspace*{4cm}
             \includegraphics[width=0.25\linewidth]{./fig/drexml_doi.pdf}
         \end{tikzfigure}
-        }
+    }
 
     \column{0.67}
-        \block{Inferir el Impacto de las Dianas sobre el Mapa Mecanicista de la Enfermedad}{%
-            \begin{tikzfigure}
+    \block{Inferir el Impacto de las Dianas sobre el Mapa Mecanicista de la Enfermedad}{%
+        \begin{tikzfigure}
             \includegraphics[width=\linewidth]{./fig/drexml_font_L.png}
-            \end{tikzfigure}
-        }
+        \end{tikzfigure}
+    }
 
-        % \note[rotate=8, connection=true, width = 7cm,
-        % targetoffsetx=-6cm,targetoffsety=8cm
-        % % roundedcorners=15, targetoffsetx=2cm
-        % ]{Oh wait! A note!}
+    % \note[rotate=8, connection=true, width = 7cm,
+    % targetoffsetx=-6cm,targetoffsety=8cm
+    % % roundedcorners=15, targetoffsetx=2cm
+    % ]{Oh wait! A note!}
 \end{columns}
 
 
@@ -149,57 +183,54 @@
 \begin{columns}
 
     \column{0.6}
-        \begin{subcolumns}
-            \subcolumn{0.36}
+    \begin{subcolumns}
+        \subcolumn{0.36}
 
-                    \block{Métricas inteligibles}{%
-                        \begin{tikzfigure}
-                            \includegraphics[width=\linewidth]{./fig/metrics.pdf}
-                        \end{tikzfigure}
-                    }
+        \block{Métricas inteligibles}{%
+            \begin{tikzfigure}
+                \includegraphics[width=\linewidth]{./fig/metrics.pdf}
+            \end{tikzfigure}
+        }
 
-            \subcolumn{0.64}
+        \subcolumn{0.64}
 
-                    \block{Filtrando y contextualizando}{%
-                        \begin{tikzfigure}
-                            \includegraphics[width=\linewidth]{./fig/fanconi_anemia_profile_egfr.pdf}
-                        \end{tikzfigure}
-                    }
-        
- 
+        \block{Filtrando y contextualizando}{%
+            \begin{tikzfigure}
+                \includegraphics[width=\linewidth]{./fig/fanconi_anemia_profile_egfr.pdf}
+            \end{tikzfigure}
+        }
 
-        \end{subcolumns}
+
+
+    \end{subcolumns}
 
     \block{Resultados}{
         \begin{itemize}
-            \item Software Libre \colorbox{gray!10}{{\bf{pip install drexml}}}
+            \item Software Libre \colorbox{gray!10}{{\bf{pip install drexml}}}. Fácilmente usable \colorbox{gray!10}{{\bf{drexml run disease.env}}}
             
-            \item Fácilmente usable \colorbox{gray!10}{{\bf{drexml run disease.env}}}
+            \item \textbf{Interrogar funcionalmente} a las dianas en el contexto de una enfermedad dada.
             
-            \item Interrogar funcionalmente a las dianas en el contexto de una enfermedad dada.
-            
-            \item Anemia de Fanconi
-            \begin{itemize}
-                \item Resultados congruentes con validaciones experimentales previas.
-                \item TGF$\beta$1 y EGFR son dianas más específicas con menos efectos secundarios.
-            \end{itemize}
+            \item Preparada para regímenes de \textbf{escasez de datos}.
 
-            \item Melanoma Familiar
-            \begin{itemize}
-                \item Se proponen dianas que iterfieren con la vía de melanogénesis:TYR / JAK.
-            \end{itemize}
-            
-            \item Preparada para regímenes de escasez de datos.
+            \item Provada eficiacia:
+                  \begin{itemize}
+                      \item Anemia Fanconi \citep{esteban2024mechanistic}
+                      \item COVID-19 \citep{loucera2020drug}
+                      \item Retintis Pigmentosa \citep{olivares2022spm,esteban2024mechanistic}
+                  \end{itemize}
+
+            \item Perspectiva complementaria a herramientas punteras (CMap, DTSEA).
+
         \end{itemize}
     }
-            
+
     \column{0.4}
 
     \block{Melanoma Familiar}{%
-         \begin{tikzfigure}
-             \includegraphics[width=0.92\linewidth]{./fig/heatmap_circuits_KDT_drugeff_mela.pdf}
-         \end{tikzfigure}
-      }
+        \begin{tikzfigure}
+            \includegraphics[width=0.92\linewidth]{./fig/heatmap_circuits_KDT_drugeff_mela.pdf}
+        \end{tikzfigure}
+    }
 
 
 \end{columns}
@@ -208,22 +239,22 @@
 \begin{columns}
 
     \column{0.3}
-        \mtblock{2cm}{Financiación}{%
-            \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/ministerio.pdf}}
-            \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/mlfpm_grant.png}}
-        }
+    \mtblock{2cm}{Financiación}{%
+        \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/ministerio.pdf}}
+        \hspace{\stretch{1}}
+        \raisebox{-0.5\height}{\includegraphics[width=0.45\linewidth]{./fig/mlfpm_grant.png}}
+    }
 
     \column{0.7}
-        \mtblock{2cm}{Afiliaciones del Ponente}{%
-            \raisebox{-0.5\height}{\includegraphics[width=0.24\linewidth]{./fig/andalusianplatform_color.png}}
-            \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/fps_horizontal.png}}
-            \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.16\linewidth]{./fig/ibis_logo.png}}
-            \hspace{\stretch{1}}
-            \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/ciberer.png}}
-        }
+    \mtblock{2cm}{Afiliaciones del Ponente}{%
+        \raisebox{-0.5\height}{\includegraphics[width=0.24\linewidth]{./fig/andalusianplatform_color.png}}
+        \hspace{\stretch{1}}
+        \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/fps_horizontal.png}}
+        \hspace{\stretch{1}}
+        \raisebox{-0.5\height}{\includegraphics[width=0.16\linewidth]{./fig/ibis_logo.png}}
+        \hspace{\stretch{1}}
+        \raisebox{-0.5\height}{\includegraphics[width=0.25\linewidth]{./fig/ciberer.png}}
+    }
 
 \end{columns}
 
